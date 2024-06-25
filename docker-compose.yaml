@@ -1,0 +1,16 @@
+version: '3.8'  # Specify the Docker Compose version
+
+services:
+  webapi:  # Name of the service
+    build: 
+      context: .  # Path to the directory containing the Dockerfile
+      dockerfile: Dockerfile  # Dockerfile name, change if different
+    ports:
+      - "8080:5000"  # Map port 80 inside the container to port 8080 on the host
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development  # Set environment variables as needed    
+    networks:
+      - webnet  # Optional: specify a custom network
+
+networks:
+  webnet:

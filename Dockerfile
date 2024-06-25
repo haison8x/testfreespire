@@ -18,7 +18,11 @@ COPY --from=builder /app .
 
 ENV TZ="America/La_Paz" 
 
-RUN apk update && apk add nano && apk --no-cache add icu-libs fontconfig ttf-dejavu libc6-compat
+RUN apk update && apk add nano 
+RUN apk --no-cache add msttcorefonts-installer fontconfig && \
+    update-ms-fonts && \
+    fc-cache -f
+RUN apk --no-cache add icu-libs libc6-compat
 
 
 ENTRYPOINT ["dotnet", "Test.dll"]
